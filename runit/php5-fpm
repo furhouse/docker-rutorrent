@@ -1,0 +1,10 @@
+#!/bin/bash
+#######################################
+## docker-rutorrent                  ##
+## A full rutorrent setup for docker ##
+#######################################
+## php5-fpm startup script           ##
+#######################################
+
+## Bring up PHP
+/usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf

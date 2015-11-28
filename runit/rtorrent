@@ -1,0 +1,17 @@
+#!/bin/bash
+#######################################
+## docker-rutorrent                  ##
+## A full rutorrent setup for docker ##
+#######################################
+## rtorrent startup script           ##
+#######################################
+
+# Clean up rtorrent sessions
+rm -rf /home/rtorrent/.rtorrent/session
+mkdir -p /home/rtorrent/.rtorrent/session
+
+# Make sure permissions are correct
+chown -R rtorrent: /home/rtorrent
+
+# Start rtorrent
+exec /sbin/setuser rtorrent rtorrent

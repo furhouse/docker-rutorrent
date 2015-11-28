@@ -1,0 +1,10 @@
+#!/bin/bash
+#######################################
+## docker-rutorrent                  ##
+## A full rutorrent setup for docker ##
+#######################################
+## NGINX startup script              ##
+#######################################
+
+## Bring up NGINX
+/usr/sbin/nginx -g 'daemon off;'
