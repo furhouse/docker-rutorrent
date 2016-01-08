@@ -1,3 +1,9 @@
 sys:
+  container_name: rutorrent
   build: .
   restart: always
+  tty: true
+  external_links:
+    - trusting_kirch
+  environment:
+    - VIRTUAL_HOST=rutorrent.localsrv

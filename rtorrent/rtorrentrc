@@ -19,7 +19,7 @@
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
-#session = ./session
+session = /home/rtorrent/.rtorrent/session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
@@ -87,4 +87,4 @@
 encoding_list = UTF-8
 scgi_local = /home/rtorrent/scgi.socket
 execute = chmod,ug=rw\,o=,/home/rtorrent/scgi.socket
-#execute = chgrp,rtorrent,/home/rtorrent/scgi.socket
+execute = chgrp,rtorrent-scgi,/home/rtorrent/scgi.socket

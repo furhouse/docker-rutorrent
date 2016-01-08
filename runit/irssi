@@ -1,0 +1,10 @@
+#!/bin/bash
+#######################################
+## docker-rutorrent                  ##
+## A full rutorrent setup for docker ##
+#######################################
+## irssi startup script              ##
+#######################################
+
+# Start irssi
+exec /sbin/setuser rtorrent irssi
