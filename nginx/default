@@ -10,7 +10,10 @@ server {
 	location / {
 		try_files $uri $uri/ =404;
 	}
-
+	location /RPC2 {
+		include uwsgi_params;
+		scgi_pass unix:/home/rtorrent/scgi.socket;
+	}
 	location ~ \.php$ {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
 		fastcgi_pass unix:/var/run/php5-fpm.sock;
