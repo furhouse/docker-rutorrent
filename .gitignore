@@ -1,0 +1,4 @@
+data/rtorrent/*
+!data/rtorrent/.gitkeep
+data/rutorrent/*
+!data/rutorrent/.gitkeep

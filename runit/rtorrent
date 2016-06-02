@@ -6,6 +6,20 @@
 ## rtorrent startup script           ##
 #######################################
 
+## Setup defaults if not existing
+if [ ! -f /home/rtorrent/.rtorrent.rc ]; then
+  cp /docker/rtorrent/rtorrentrc /home/rtorrent/.rtorrent.rc
+  chown rtorrent:rtorrent /home/rtorrent/.rtorrent.rc
+fi
+
+## Delete socket if exists
+if [ -f /home/rtorrent/scgi.socket ]; then
+  rm /home/rtorrent/scgi.socket
+fi
+
+mkdir -p /home/rtorrent/.rtorrent/session
+mkdir -p /home/rtorrent/Downloads
+mkdir -p /home/rtorrent/Torrents
 # Clean up rtorrent sessions
 rm -rf /home/rtorrent/.rtorrent/session
 mkdir -p /home/rtorrent/.rtorrent/session

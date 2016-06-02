@@ -6,5 +6,20 @@
 ## irssi startup script              ##
 #######################################
 
+## Setup autodl-irssi
+if [ ! -d /home/rtorrent/.irssi ]; then
+  mkdir -p /home/rtorrent/.irssi/scripts/autorun
+  cd /home/rtorrent/.irssi/scripts
+  curl -sL http://git.io/vlcND | grep -Po '(?<="browser_download_url": ")(.*-v[\d.]+.zip)' | xargs wget --quiet -O autodl-irssi.zip
+  unzip -o autodl-irssi.zip && rm autodl-irssi.zip && cp autodl-irssi.pl autorun/ && mkdir -p /home/rtorrent/.autodl
+  cp /docker/irssi/autodl.cfg /home/rtorrent/.autodl/autodl.cfg
+fi
+
+## Fix permissions
+if [ -d /home/rtorrent/.autodl ]; then
+  chown -R rtorrent:rtorrent /home/rtorrent/.autodl
+fi
+chown -R rtorrent:rtorrent /home/rtorrent/.irssi
+
 # Start irssi
 exec /sbin/setuser rtorrent irssi

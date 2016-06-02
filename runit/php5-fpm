@@ -6,5 +6,35 @@
 ## php5-fpm startup script           ##
 #######################################
 
+shopt -s dotglob nullglob
+## Install rutorrent
+if [[ ! -d /srv/rutorrent/public_html ]]; then
+    mkdir -p /srv/rutorrent
+    cd /srv/rutorrent
+    git clone https://github.com/Novik/ruTorrent.git public_html
+    cd public_html && git submodule add https://github.com/autodl-community/autodl-rutorrent.git plugins/autodl-irssi
+    cp /docker/rutorrent/conf.php /srv/rutorrent/public_html/plugins/autodl-irssi/conf.php
+    sed -i "s#\"php\".*#\"php\"   => '/usr/bin/php',#g" /srv/rutorrent/public_html/conf/config.php
+    sed -i "s#\"curl\".*#\"curl\"   => '/usr/bin/curl',#g" /srv/rutorrent/public_html/conf/config.php
+    sed -i "s#scgi_port = 5000#scgi_port = 0#g" /srv/rutorrent/public_html/conf/config.php
+    sed -i 's#scgi_host = "127.0.0.1"#scgi_host = "unix:///home/rtorrent/scgi.socket"#g' /srv/rutorrent/public_html/conf/config.php
+    chown -R www-data: /srv/rutorrent/public_html
+fi
+
+## Copy over share folder contents if mount does not contain proper files
+if [[ -d /srv/rutorrent/share ]]; then
+    if [[ ! -f /srv/rutorrent/.htaccess ]]; then
+        mv /srv/rutorrent/public_html/share/* /srv/rutorrent/share
+    fi
+    chown -R www-data:www-data /srv/rutorrent/config
+    rm -rf /srv/rutorrent/public_html/share
+    ln -s  /srv/rutorrent/share /srv/rutorrent/public_html/share
+fi
+
+## Copy over default rtorrentrc if not mounted
+if [[ ! -f /home/rtorrent/.rtorrent.rc ]]; then
+    cp /docker/rtorrent/rtorrentrc /home/rtorrent/.rtorrent.rc
+fi
+
 ## Bring up PHP
 /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf
