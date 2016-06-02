@@ -8,7 +8,9 @@ docker-compose up -d
 
 ### Configuration
 To configure rtorrent, edit the settings in data/rtorrent/.rtorrent.rc after the container has started
-All options are changeable except for scgi_local, sessions, and the two execute variables at the end of the file
+All options are changeable except for scgi_local, sessions, and the two execute variables at the end of the file.
+
+Open the ports that you want by setting them in data/rtorrent/.rtorrent.rc and adding the ports in docker-compose.yaml
 
 ### Downloads folder
 The default downloads folder is in  data/rtorrent/Downloads
