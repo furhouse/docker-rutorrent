@@ -16,7 +16,7 @@ mkdir -p /home/rtorrent/.rtorrent/session
 mkdir -p /home/rtorrent/Downloads
 mkdir -p /home/rtorrent/Torrents
 # Clean up rtorrent sessions
-rm /home/rtorrent/.rtorrent/session/.lock
+rm /home/rtorrent/.rtorrent/session/rtorrent.lock
 
 # Make sure permissions are correct
 chown -R rtorrent: /home/rtorrent
