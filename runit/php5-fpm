@@ -31,10 +31,5 @@ if [[ -d /srv/rutorrent/share ]]; then
     ln -s  /srv/rutorrent/share /srv/rutorrent/public_html/share
 fi
 
-## Copy over default rtorrentrc if not mounted
-if [[ ! -f /home/rtorrent/.rtorrent.rc ]]; then
-    cp /docker/rtorrent/rtorrentrc /home/rtorrent/.rtorrent.rc
-fi
-
 ## Bring up PHP
 /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf
