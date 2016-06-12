@@ -16,10 +16,12 @@ RUN export LANG=en_US.UTF-8
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php5-5.6
 
 ## Packages
-RUN apt-get update && apt-get -y install curl unzip git rtorrent supervisor php5-fpm nginx php5-cli unrar mediainfo libav-tools php-apc nano irssi libarchive-zip-perl libhtml-parser-perl libxml-libxml-perl libdigest-sha-perl libjson-perl libjson-xs-perl libcrypt-ssleay-perl wget apache2-utils
+RUN apt-get update && apt-get -y install curl unzip git rtorrent supervisor php5-fpm nginx php5-cli unrar mediainfo libav-tools php5-apcu nano irssi libarchive-zip-perl libhtml-parser-perl libxml-libxml-perl libdigest-sha-perl libjson-perl libjson-xs-perl libcrypt-ssleay-perl wget apache2-utils
 
 ## Configure php5-fpm
 RUN php5enmod opcache
+RUN php5enmod apcu
+ADD php5/php.ini /etc/php5/fpm.php.ini
 
 ## Configure a user for rtorrent
 RUN useradd rtorrent
